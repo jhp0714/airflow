@@ -30,3 +30,5 @@ with DAG(
         prev_month_day_last = data_interval_end.in_timezone("Asia/Seoul").replace(day=1) + relativedelta(days=-1)
         print(prev_month_day_first.strftime('%Y-%m-%d'))
         print(prev_month_day_last.strftime('%Y-%m-%d'))
+
+    get_datetime_macro() >> get_datetime_calc()
