@@ -29,4 +29,4 @@ with DAG(
         prev_month_day_first = data_interval_end.in_timezone("Asia/Seoul") + relativedelta(months=-1, day=1)
         prev_month_day_last = data_interval_end.in_timezone("Asia/Seoul").replace(day=1) + relativedelta(days=-1)
         print(prev_month_day_first.strftime('%Y-%m-%d'))
-        rint(prev_month_day_last.strftime('%Y-%m-%d'))
+        print(prev_month_day_last.strftime('%Y-%m-%d'))
