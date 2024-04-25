@@ -3,7 +3,7 @@ import pendulum
 from airflow.decorators import task
 
 with DAG(
-    dag_id="ddags_python_with_macro",
+    dag_id="dags_python_with_macro",
     schedule="10 0 * * 0 ",
     start_date=pendulum.datetime(2023, 3, 1, tz="Asia/Seoul"),
     catchup=False
