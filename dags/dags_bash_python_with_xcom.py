@@ -42,3 +42,5 @@ with DAG(
         print('return_value : ' + return_value)
 
         bash_push >> python_pull_xcom()
+
+        # df
