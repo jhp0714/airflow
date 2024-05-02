@@ -10,12 +10,12 @@ with DAG(
     catchup=False
 ) as dag:
     var_value = Variable.get("sample_key")
-
+# 권고 안함
     bash_var_1 = BashOperator(
         task_id="bash_var_1",
         bash_command=f"echo variable:{var_value}"
     )
-
+# 권고
     bash_var_2 = BashOperator(
         task_id = "bash_var_2",
         bash_command="echo variable:{{var.value.sample_key}}"
