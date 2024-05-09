@@ -11,29 +11,29 @@ with DAG(
 ) as dag:
     
     empty_1 = EmptyOperator(
-        taks_id='empty_1'
+        task_id='empty_1'
     )
 
     empty_2 = EmptyOperator(
-        taks_id='empty_2'
+        task_id='empty_2'
     )
 
     empty_1 >> Label('between 1 and 2') >> empty_2
 
     empty_3 = EmptyOperator(
-        taks_id='empty_3'
+        task_id='empty_3'
     )
 
     empty_4 = EmptyOperator(
-        taks_id='empty_4'
+        task_id='empty_4'
     )
 
     empty_5 = EmptyOperator(
-        taks_id='empty_5'
+        task_id='empty_5'
     )
 
     empty_6 = EmptyOperator(
-        taks_id='empty_6'
+        task_id='empty_6'
     )
 
     empty_2 >> Label('Start Branch') >> ['empty_3', 'empty_4', 'empty_5'] >> Label('End Branch') >> empty_6
