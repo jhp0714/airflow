@@ -1,0 +1,39 @@
+from airflow import DAG
+import pendulum
+from airflow.operators.empty import EmptyOperator
+from airflow.utils.edgemodifier import Label
+
+with DAG(
+    dag_id='dags_empty_with_dege_label',
+    start_date=pendulum.datetime(2024,4,1, tz='Asia/Seoul'),
+    schedule=None,
+    catchup=False
+) as dag:
+    
+    empty_1 = EmptyOperator(
+        taks_id='empty_1'
+    )
+
+    empty_2 = EmptyOperator(
+        taks_id='empty_2'
+    )
+
+    empty_1 >> Label('between 1 and 2') >> empty_2
+
+    empty_3 = EmptyOperator(
+        taks_id='empty_3'
+    )
+
+    empty_4 = EmptyOperator(
+        taks_id='empty_4'
+    )
+
+    empty_5 = EmptyOperator(
+        taks_id='empty_5'
+    )
+
+    empty_6 = EmptyOperator(
+        taks_id='empty_6'
+    )
+
+    empty_2 >> Label('Start Branch') >> ['empty_3', 'empty_4', 'empty_5'] >> Label('End Branch') >> empty_6
