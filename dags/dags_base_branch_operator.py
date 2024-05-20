@@ -1,11 +1,11 @@
 from airflow import DAG
 import pendulum
-from airflow.operators.python import PythonOperator
 from airflow.operators.branch import BaseBranchOperator
+from airflow.operators.python import PythonOperator
 
 with DAG(
     dag_id='dags_base_branch_operator',
-    start_date=pendulum.datetime(2024,4,1, tz = 'Asia/Seoul'),
+    start_date=pendulum.datetime(2023,4,1, tz='Asia/Seoul'),
     schedule=None,
     catchup=False
 ) as dag:
@@ -13,16 +13,18 @@ with DAG(
         def choose_branch(self, context):
             import random
             print(context)
+            
             item_lst = ['A', 'B', 'C']
             selected_item = random.choice(item_lst)
             if selected_item == 'A':
                 return 'task_a'
             elif selected_item in ['B','C']:
-                return ['task_b', 'task_c']
-            
-    custom_branch_operator=CustomBranchOperator(task_id='python_branch_task')
+                return ['task_b','task_c']
+
     
-        
+    custom_branch_operator = CustomBranchOperator(task_id='python_branch_task')
+
+    
     def common_func(**kwargs):
         print(kwargs['selected'])
 

@@ -3,15 +3,15 @@ from airflow.decorators import task
 from airflow.operators.python import PythonOperator
 from airflow.operators.bash import BashOperator
 from airflow.exceptions import AirflowException
+
 import pendulum
 
 with DAG(
-    dag_id='dags_python_with_tigger_rule_eg2',
-    start_date=pendulum.datetime(2024,4,1, tz='Asia/Seoul'),
+    dag_id='dags_python_with_trigger_rule_eg2',
+    start_date=pendulum.datetime(2023,4,1, tz='Asia/Seoul'),
     schedule=None,
     catchup=False
 ) as dag:
-    
     @task.branch(task_id='branching')
     def random_branch():
         import random
@@ -23,7 +23,7 @@ with DAG(
             return 'task_b'
         elif selected_item == 'C':
             return 'task_c'
-        
+
     task_a = BashOperator(
         task_id='task_a',
         bash_command='echo upstream1'
@@ -33,7 +33,7 @@ with DAG(
     def task_b():
         print('정상 처리')
 
-    
+
     @task(task_id='task_c')
     def task_c():
         print('정상 처리')
@@ -43,4 +43,3 @@ with DAG(
         print('정상 처리')
 
     random_branch() >> [task_a, task_b(), task_c()] >> task_d()
-    

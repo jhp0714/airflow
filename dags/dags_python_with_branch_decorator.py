@@ -1,5 +1,4 @@
 from airflow import DAG
-import pendulum
 from datetime import datetime
 from airflow.operators.python import PythonOperator
 from airflow.decorators import task
@@ -17,9 +16,9 @@ with DAG(
         selected_item = random.choice(item_lst)
         if selected_item == 'A':
             return 'task_a'
-        elif selected_item == 'B':
-            return ['task_b', 'task_c']
-        
+        elif selected_item in ['B','C']:
+            return ['task_b','task_c']
+    
     def common_func(**kwargs):
         print(kwargs['selected'])
 

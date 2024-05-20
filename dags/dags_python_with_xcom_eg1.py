@@ -1,5 +1,6 @@
 from airflow import DAG
 import pendulum
+import datetime
 from airflow.decorators import task
 
 with DAG(
@@ -29,4 +30,5 @@ with DAG(
         print(value1)
         print(value2)
 
-    xcom_push1() >> xcom_push2() >> xcom_pull() 
+
+    xcom_push1() >> xcom_push2() >> xcom_pull()
