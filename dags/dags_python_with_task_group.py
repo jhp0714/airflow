@@ -13,7 +13,7 @@ with DAG(
 ) as dag:
 
     def inner_func(**kwargs):
-        msg = kwargs.get('get') or ''
+        msg = kwargs.get('msg') or ''
         print(msg)
 
     @task_group(group_id='first_group')
@@ -36,7 +36,7 @@ with DAG(
         """여기에 적은 docstring은 표시되지 않는다."""
 
         @task(task_id='inner_function1')
-        def inner_funct1(**kwargs):
+        def inner_func1(**kwargs):
             print('두 번째 taskgroup 내 첫 번째 task')
 
         inner_function2 = PythonOperator(
@@ -45,6 +45,6 @@ with DAG(
             op_kwargs={'msg' : '두 번째 taskgroup 내 두 번째 task'}
         )
 
-        inner_funct1() >> inner_function2
+        inner_func1() >> inner_function2
 
     group_1() >> group_2
