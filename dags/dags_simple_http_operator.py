@@ -24,12 +24,21 @@ with DAG(
     )
 
     @task(task_id='python_2')
-    def python_2(**kwargs):
+    def python_2(**kwargs) :
         ti = kwargs['ti']
         rslt = ti.xcom_pull(task_ids='tb_cycle_station_info')
+
+        if not rslt :
+            raise ValueError("No data pulled from XCom! API 응답을 확인하세요.")
+
         import json
         from pprint import pprint
 
-        pprint(json.loads(rslt))
+        try :
+            parsed_json = json.loads(rslt)
+            pprint(parsed_json)
+        except json.JSONDecodeError :
+            print("❌ JSON 디코딩 실패. 응답이 JSON 형식인지 확인하세요.")
+            print(rslt)  # 원본 응답 출력
 
     tb_cycle_station_info >> python_2()
