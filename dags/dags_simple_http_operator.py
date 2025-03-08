@@ -13,13 +13,14 @@ with DAG(
     '''서울시 공공자전거 대여소 정보'''
     tb_cycle_station_info = HttpOperator(
         task_id='tb_cycle_station_info',
-        http_conn_id='openapi.seoul.go.kr',
-        endpoint='{{var.value.apikey_openapi_seoul_go_kr}}/json/tbCycleStationInfo/1/5/',
+        http_conn_id='openapi.seoul.go.kr',  # Connection ID 유지
+        endpoint='json/tbCycleStationInfo/1/5/',  # API Key 제거
         method='GET',
         headers={'Content-Type' : 'application/json',
-                  'charset' : 'utf-8',
-                  'Accept' : '*/*'
-                 }
+                 'charset' : 'utf-8',
+                 'Accept' : '*/*'
+                 },
+        request_params={'apikey' : '{{ var.value.apikey_openapi_seoul_go_kr }}'}  # API Key 추가
     )
 
 
