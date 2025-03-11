@@ -5,7 +5,7 @@ import pendulum
 with DAG(
     dag_id='dags_seoul_api_corona',
     schedule='0 7 * * *',
-    start_date=pendulum.datetime(20205,4,1, tz='Asia/Seoul'),
+    start_date=pendulum.datetime(2025,4,1, tz='Asia/Seoul'),
     catchup=False
 ) as dag:
     '''서울시 코로나 19 확진자 발생 동향'''
