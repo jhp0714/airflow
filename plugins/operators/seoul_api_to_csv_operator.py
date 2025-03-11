@@ -7,7 +7,7 @@ class SeoulApiToCsvOperator(BaseOperator):
 
     def __init__(self, dataset_nm, path, file_name, base_dt=None, **kwargs):
         super().__init__(**kwargs)
-        self.http_conn_id = 'openapi_seoul',
+        self.http_conn_id = 'openapi_seoul'
         self.path = path
         self.file_name = file_name
         self.endpoint = '{{ var.value.apikey_openapi_seoul_go_kr }}/json/' + dataset_nm
@@ -54,7 +54,7 @@ class SeoulApiToCsvOperator(BaseOperator):
         response = requests.get(request_url, headers)
         contents = json.loads(response.text)
 
-        key_nm = list(contents.key())[0]
+        key_nm = list(contents.keys())[0]
         row_data = contents.get(key_nm).get('row')
         row_df = pd.DataFrame(row_data)
 
