@@ -4,7 +4,7 @@ import pendulum
 
 with DAG(
     dag_id='dags_python_with_postgres',
-    start_date=pendulum.datetime(2025,4,1,tz='Asia/Seoul'),
+    start_date=pendulum.datetime(2025,2,1,tz='Asia/Seoul'),
     schedule=None,
     catchup=False
 ) as dag:
